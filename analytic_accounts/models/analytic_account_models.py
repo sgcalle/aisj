@@ -234,7 +234,7 @@ class AnalyticAccounts(models.Model):
             else:
                 raise exceptions.ValidationError(_("Company needs country specified"))
                 
-            values["company_id"] = company_id[0]
+            values["company_id"] = company_id
                 
             department_code     = code[9:13]
             sub_department_code = code[13:17]
