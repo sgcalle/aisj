@@ -198,8 +198,12 @@ class AnalyticAccounts(models.Model):
 
     def _import(self, values):
         code = values["code"]
+        
+        REFERENCE_LENGTH = 37
+        
+        
         print(code)
-        if len(code) == 37:
+        if len(code) == REFERENCE_LENGTH:
             country_code        = code[0:2]
             region_code         = code[2:5]
             company_code        = code[5:9]
@@ -213,7 +217,7 @@ class AnalyticAccounts(models.Model):
             CompanyEnv = self.env["res.company"]
             company_id = CompanyEnv.search([("analytic_code", "=", company_code)])
             if not company_id:
-                raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid company code)"))
+                raise exceptions.ValidationError(_("Invalid company code"))
             company_record = CompanyEnv.browse([company_id])
             
             if True:
@@ -222,10 +226,10 @@ class AnalyticAccounts(models.Model):
             
             if company_record.ids[0].country_id:
                 if company_record.ids[0].country_id.code == country_code:
-                    raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid country code)"))
+                    raise exceptions.ValidationError(_("Invalid country code"))
                 if company_record.ids[0].state_id:
                     if company_record.ids[0].state_id.code == region_code:
-                        raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid region/state code)"))
+                        raise exceptions.ValidationError(_("Invalid region/state code"))
                 else:
                     raise exceptions.ValidationError(_("Country needs state specified"))
             else:
@@ -353,7 +357,7 @@ class AnalyticAccounts(models.Model):
                     })
                 values["item"] = new_item.id
         else:
-            raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯"))
+            raise exceptions.ValidationError(_("The reference must contain 37 characters"))
         pass
 
     @api.model
