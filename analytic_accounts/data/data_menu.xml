@@ -14,6 +14,7 @@
         <field name="name">Analytic account</field>
         <field name="res_model">account.analytic.account</field>
         <field name="view_mode">tree,form,graph,search</field>
+        <field name="view_id" ref=" analytic_accounts.view_analytic_account_form"/>
     </record>
     
     <!-- Action for reports -->
