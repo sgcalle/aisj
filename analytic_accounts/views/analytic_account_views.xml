@@ -227,7 +227,8 @@
 					
 						<t t-esc="i" />
 					</p>
-				</t>
+				</t> 
+				
 			</div>
 		</field>
 	</record>
