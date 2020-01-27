@@ -224,8 +224,9 @@ class AnalyticAccounts(models.Model):
                 # Whaaaat?
                 if company_record.ids[0].country_id.code != country_code:
                     raise exceptions.ValidationError(_("Invalid country code"))
-                if (company_record.ids[0].state_id 
-                   and company_record.ids[0].state_id.code != region_code):
+                print("Region Code: {}".format(company_record.ids[0].state_id.code))
+                if company_record.ids[0].state_id:
+                    if company_record.ids[0].state_id.code != region_code:
                         raise exceptions.ValidationError(_("Invalid region/state code"))
                 else:
                     raise exceptions.ValidationError(_("Country needs state specified"))
