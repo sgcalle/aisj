@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Analytics Accounts",
+    'name': "Analytic Accounts Improved",
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': """ An improvement in Analyitic Accounts,
+    by adding Graphics, filter, import/export automation and
+    reports """,
 
     'description': """
         Long description of module's purpose
