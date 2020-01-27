@@ -2,13 +2,13 @@
 
 from odoo import models, fields, api, exceptions, _
 
-def cojo_padding_4_right(number):
+def string_padding_4_right(number):
     return str(number).rjust(4, '0') if type(number) == str else "0000"
 
-def cojo_padding_3_right(number):
+def string_padding_3_right(number):
     return str(number).rjust(3, '0') if type(number) == str else "000"
 
-def cojo_padding_2_right(number):
+def string_padding_2_right(number):
     return str(number).rjust(2, '0') if type(number) == str else "00"
 
 # We add these fields because we can use odoo's Company, Country and State models
@@ -100,15 +100,15 @@ class AnalyticAccounts(models.Model):
         return res
 
     def make_or_change(self, values):
-        company_code = cojo_padding_4_right(self.company_id.analytic_code)
+        company_code = string_padding_4_right(self.company_id.analytic_code)
         if "company_id" in values:
             if values["company_id"]:
                 company = self.env['res.company'].browse(values["company_id"])
-                company_code = cojo_padding_4_right(company.analytic_code)
+                company_code = string_padding_4_right(company.analytic_code)
         if not company_code:
             company_code = "0000"
             
-        country_code = cojo_padding_2_right(self.country_id.code)
+        country_code = string_padding_2_right(self.country_id.code)
         if "country_id" in values:
             if values["country_id"]:
                 country = self.env['res.country'].browse(values["country_id"])
@@ -116,7 +116,7 @@ class AnalyticAccounts(models.Model):
         if not country_code:
             country_code = "00"
 
-        state_code = cojo_padding_3_right(self.state_id.code)
+        state_code = string_padding_3_right(self.state_id.code)
         if "state_id" in values:
             if values["state_id"]:
                 state = self.env['res.country.state'].browse(values["state_id"])
@@ -124,62 +124,62 @@ class AnalyticAccounts(models.Model):
         if not state_code:
             state_code = "000"
 
-        department_code = cojo_padding_4_right(self.department.code)
+        department_code = string_padding_4_right(self.department.code)
         if "department" in values:
             if values["department"]:
                 department = self.env['analytic_accounts.group.department'].browse(values["department"])
-                department_code = cojo_padding_4_right(department.code)
+                department_code = string_padding_4_right(department.code)
             else:
                 values["sub_department"] = False
         if not department_code:
             department_code = "0000"
 
-        sub_department_code = cojo_padding_4_right(self.sub_department.code)
+        sub_department_code = string_padding_4_right(self.sub_department.code)
         if "sub_department" in values:
             if values["sub_department"]:
                 sub_department = self.env['analytic_accounts.group.sub_department'].browse(values["sub_department"])
-                sub_department_code = cojo_padding_4_right(sub_department.code)
+                sub_department_code = string_padding_4_right(sub_department.code)
         if not sub_department_code:
             sub_department_code = "0000"
 
-        type_code = cojo_padding_4_right(self.type.code)
+        type_code = string_padding_4_right(self.type.code)
         if "type" in values:
             if values["type"]:
                 type_record = self.env['analytic_accounts.group.type'].browse(values["type"])
-                type_code = cojo_padding_4_right(type_record.code)
+                type_code = string_padding_4_right(type_record.code)
         if not type_code:
             type_code = "0000"
 
-        group_code = cojo_padding_4_right(self.group.code)
+        group_code = string_padding_4_right(self.group.code)
         if "group" in values:
             if values["group"]:
                 group = self.env['analytic_accounts.group'].browse(values["group"])
-                group_code = cojo_padding_4_right(group.code)
+                group_code = string_padding_4_right(group.code)
         if not group_code:
             group_code = "0000"
 
-        account_code = cojo_padding_4_right(self.account.code)
+        account_code = string_padding_4_right(self.account.code)
         if "account" in values:
             if values["account"]:
                 account = self.env['analytic_accounts.group.account'].browse(values["account"])
-                account_code = cojo_padding_4_right(account.code)
+                account_code = string_padding_4_right(account.code)
         if not account_code:
             account_code = "0000"
 
-        sub_account_code = cojo_padding_4_right(self.sub_account.code)
+        sub_account_code = string_padding_4_right(self.sub_account.code)
         if "sub_account" in values:
             if values["sub_account"]:
                 sub_account = self.env['analytic_accounts.group.sub_account'].browse(values["sub_account"])
-                sub_account_code = cojo_padding_4_right(sub_account.code)
+                sub_account_code = string_padding_4_right(sub_account.code)
         if not sub_account_code:
             sub_account_code = "0000"
 
-        item_code = cojo_padding_4_right(self.item.code)
+        item_code = string_padding_4_right(self.item.code)
         
         if "item" in values:
             if values["item"]:
                 item = self.env['analytic_accounts.group.item'].browse(values["item"])
-                item_code = cojo_padding_4_right(item.code)
+                item_code = string_padding_4_right(item.code)
         if not item_code:
             item_code = "0000"
 
@@ -554,7 +554,7 @@ class GroupBase(models.Model):
         print("Creando un grupo generico")
         
         if "code" in values:
-            values["code"] = cojo_padding_4_right(values["code"])
+            values["code"] = string_padding_4_right(values["code"])
                     
         return super(GroupBase, self).write(values)
 
