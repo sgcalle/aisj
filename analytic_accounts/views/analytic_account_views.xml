@@ -121,7 +121,7 @@
 									</group>
 								</group>
 							</group>
-                            <hr/>
+							<hr />
 							<group string="Groups">
 								<group colspan="2" col="2">
 									<group colspan="1">
@@ -221,11 +221,13 @@
 		<field name="name">Analytic Account Report Form</field>
 		<field name="priority" eval="40" />
 		<field name="arch" type="xml">
-			<t t-foreach="[1, 2, 3]" t-as="i">
-				<p>
-					<t t-esc="i" />
-				</p>
-			</t>
+			<div>
+				<t t-foreach="[1, 2, 3]" t-as="i">
+					<p>
+						<t t-esc="i" />
+					</p>
+				</t>
+			</div>
 		</field>
 	</record>
 
