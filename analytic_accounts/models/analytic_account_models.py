@@ -15,6 +15,7 @@ def cojo_padding_2_right(number):
 class Company(models.Model):
     _inherit = "res.company"
     
+    
     analytic_code = fields.Char(string="Analytic Code")
     
     _sql_constraints = [(
