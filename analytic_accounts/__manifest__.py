@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Analytic Accounts Improved",
+    'name': "Analytics Accounts",
 
-    'summary': """ An improvement in Analyitic Accounts,
-    by adding Graphics, filter, import/export automation and
-    reports """,
+    'summary': """ Improvement of odoo's analytics accounts """,
 
     'description': """
-        An improvement in Analyitic Accounts,
-        by adding Graphics, filter, import/export automation and
-        reports 
+        Improvement of odoo's analytic accounts
     """,
 
     'author': "Eduweb group",
-    'website': "http://www.eduwebgroup.com",
+    'website': "https://web.eduwebgroup.com/",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Accounting',
-    'version': '0.1-beta',
+    'category': 'Accounting & Finance',
+    'version': '0.2',
 
     # any module necessary for this one to work correctly
     'depends': ['base','account_accountant'],

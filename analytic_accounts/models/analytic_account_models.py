@@ -2,13 +2,13 @@
 
 from odoo import models, fields, api, exceptions, _
 
-def string_padding_4_right(number):
+def cojo_padding_4_right(number):
     return str(number).rjust(4, '0') if type(number) == str else "0000"
 
-def string_padding_3_right(number):
+def cojo_padding_3_right(number):
     return str(number).rjust(3, '0') if type(number) == str else "000"
 
-def string_padding_2_right(number):
+def cojo_padding_2_right(number):
     return str(number).rjust(2, '0') if type(number) == str else "00"
 
 # We add these fields because we can use odoo's Company, Country and State models
@@ -100,15 +100,15 @@ class AnalyticAccounts(models.Model):
         return res
 
     def make_or_change(self, values):
-        company_code = string_padding_4_right(self.company_id.analytic_code)
+        company_code = cojo_padding_4_right(self.company_id.analytic_code)
         if "company_id" in values:
             if values["company_id"]:
                 company = self.env['res.company'].browse(values["company_id"])
-                company_code = string_padding_4_right(company.analytic_code)
+                company_code = cojo_padding_4_right(company.analytic_code)
         if not company_code:
             company_code = "0000"
             
-        country_code = string_padding_2_right(self.country_id.code)
+        country_code = cojo_padding_2_right(self.country_id.code)
         if "country_id" in values:
             if values["country_id"]:
                 country = self.env['res.country'].browse(values["country_id"])
@@ -116,7 +116,7 @@ class AnalyticAccounts(models.Model):
         if not country_code:
             country_code = "00"
 
-        state_code = string_padding_3_right(self.state_id.code)
+        state_code = cojo_padding_3_right(self.state_id.code)
         if "state_id" in values:
             if values["state_id"]:
                 state = self.env['res.country.state'].browse(values["state_id"])
@@ -124,62 +124,62 @@ class AnalyticAccounts(models.Model):
         if not state_code:
             state_code = "000"
 
-        department_code = string_padding_4_right(self.department.code)
+        department_code = cojo_padding_4_right(self.department.code)
         if "department" in values:
             if values["department"]:
                 department = self.env['analytic_accounts.group.department'].browse(values["department"])
-                department_code = string_padding_4_right(department.code)
+                department_code = cojo_padding_4_right(department.code)
             else:
                 values["sub_department"] = False
         if not department_code:
             department_code = "0000"
 
-        sub_department_code = string_padding_4_right(self.sub_department.code)
+        sub_department_code = cojo_padding_4_right(self.sub_department.code)
         if "sub_department" in values:
             if values["sub_department"]:
                 sub_department = self.env['analytic_accounts.group.sub_department'].browse(values["sub_department"])
-                sub_department_code = string_padding_4_right(sub_department.code)
+                sub_department_code = cojo_padding_4_right(sub_department.code)
         if not sub_department_code:
             sub_department_code = "0000"
 
-        type_code = string_padding_4_right(self.type.code)
+        type_code = cojo_padding_4_right(self.type.code)
         if "type" in values:
             if values["type"]:
                 type_record = self.env['analytic_accounts.group.type'].browse(values["type"])
-                type_code = string_padding_4_right(type_record.code)
+                type_code = cojo_padding_4_right(type_record.code)
         if not type_code:
             type_code = "0000"
 
-        group_code = string_padding_4_right(self.group.code)
+        group_code = cojo_padding_4_right(self.group.code)
         if "group" in values:
             if values["group"]:
                 group = self.env['analytic_accounts.group'].browse(values["group"])
-                group_code = string_padding_4_right(group.code)
+                group_code = cojo_padding_4_right(group.code)
         if not group_code:
             group_code = "0000"
 
-        account_code = string_padding_4_right(self.account.code)
+        account_code = cojo_padding_4_right(self.account.code)
         if "account" in values:
             if values["account"]:
                 account = self.env['analytic_accounts.group.account'].browse(values["account"])
-                account_code = string_padding_4_right(account.code)
+                account_code = cojo_padding_4_right(account.code)
         if not account_code:
             account_code = "0000"
 
-        sub_account_code = string_padding_4_right(self.sub_account.code)
+        sub_account_code = cojo_padding_4_right(self.sub_account.code)
         if "sub_account" in values:
             if values["sub_account"]:
                 sub_account = self.env['analytic_accounts.group.sub_account'].browse(values["sub_account"])
-                sub_account_code = string_padding_4_right(sub_account.code)
+                sub_account_code = cojo_padding_4_right(sub_account.code)
         if not sub_account_code:
             sub_account_code = "0000"
 
-        item_code = string_padding_4_right(self.item.code)
+        item_code = cojo_padding_4_right(self.item.code)
         
         if "item" in values:
             if values["item"]:
                 item = self.env['analytic_accounts.group.item'].browse(values["item"])
-                item_code = string_padding_4_right(item.code)
+                item_code = cojo_padding_4_right(item.code)
         if not item_code:
             item_code = "0000"
 
@@ -198,12 +198,8 @@ class AnalyticAccounts(models.Model):
 
     def _import(self, values):
         code = values["code"]
-        
-        REFERENCE_LENGTH = 37
-        
-        
         print(code)
-        if len(code) == REFERENCE_LENGTH:
+        if len(code) == 37:
             country_code        = code[0:2]
             region_code         = code[2:5]
             company_code        = code[5:9]
@@ -217,25 +213,23 @@ class AnalyticAccounts(models.Model):
             CompanyEnv = self.env["res.company"]
             company_id = CompanyEnv.search([("analytic_code", "=", company_code)])
             if not company_id:
-                raise exceptions.ValidationError(_("Invalid company code"))
+                raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid company code)"))
             company_record = CompanyEnv.browse([company_id])
             
+            if True:
+                pass
+                # raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (test)"))
+            
             if company_record.ids[0].country_id:
-                country_code = string_padding_3_right(company_record.ids[0].country_id.code)
-                if country_code != country_code:
-                    raise exceptions.ValidationError(_("Invalid country code"))
-
+                if company_record.ids[0].country_id.code == country_code:
+                    raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid country code)"))
                 if company_record.ids[0].state_id:
-                    state_code = string_padding_3_right(company_record.ids[0].state_id.code)
-                    if state_code != region_code:
-                        raise exceptions.ValidationError(_("Invalid region/state code"))
+                    if company_record.ids[0].state_id.code == region_code:
+                        raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯: (Invalid region/state code)"))
                 else:
                     raise exceptions.ValidationError(_("Country needs state specified"))
             else:
                 raise exceptions.ValidationError(_("Company needs country specified"))
-                
-            print("TEST COMPANY CODE: {}".format(company_record.ids[0].id))
-            values["company_id"] = company_record.ids[0].id
                 
             department_code     = code[9:13]
             sub_department_code = code[13:17]
@@ -359,7 +353,7 @@ class AnalyticAccounts(models.Model):
                     })
                 values["item"] = new_item.id
         else:
-            raise exceptions.ValidationError(_("The reference must contain 37 characters"))
+            raise exceptions.ValidationError(_("Cosas de la vida ¯\_(ツ)_/¯"))
         pass
 
     @api.model
@@ -501,15 +495,7 @@ class AnalyticAccounts(models.Model):
 
     @api.multi
     def write(self, values):
-        #=======================================================================
-        # for record in self:
-        #=======================================================================
-        
-        #=======================================================================
-        # self.ensure_one()
-        #=======================================================================
-        
-        print(self)
+        self.ensure_one()
         
         self.reload_dept_code(values)
         self.reload_sub_dept_code(values)
@@ -520,11 +506,9 @@ class AnalyticAccounts(models.Model):
         self.reload_sub_account_code(values)
         self.reload_item_code(values)
         
-        return super(AnalyticAccounts, self).write(values)
-
-
-
-
+        self.make_or_change(values)
+        
+        return super().write(values)
 
 # Just simply to make these groups
 class GroupBase(models.Model):
@@ -560,7 +544,7 @@ class GroupBase(models.Model):
         print("Creando un grupo generico")
         
         if "code" in values:
-            values["code"] = string_padding_4_right(values["code"])
+            values["code"] = cojo_padding_4_right(values["code"])
                     
         return super(GroupBase, self).write(values)
 
@@ -584,10 +568,6 @@ class GroupType(GroupBase):
     def create(self, values):
         res = super().create(values)
         
-        #=======================================================================
-        # print(res)
-        #=======================================================================
-        
         none_group = self.env["analytic_accounts.group"].create({
             "type_id": res.id,
             "code": "0000",
@@ -608,6 +588,8 @@ class Group(GroupBase):
     
     @api.model
     def create(self, values):
+        if not "type_id" in values:
+            values["type_id"] = self._context.get("type_id")
         res = super().create(values)
         
         #=======================================================================
@@ -634,11 +616,9 @@ class GroupAccount(GroupBase):
     
     @api.model
     def create(self, values):
+        if not "group_id" in values:
+            values["group_id"] = self._context.get("group_id")
         res = super().create(values)
-        
-        #=======================================================================
-        # print(res)
-        #=======================================================================
         
         none_sub_account = self.env["analytic_accounts.group.sub_account"].create({
             "account_id": res.id,
@@ -660,11 +640,9 @@ class GroupSubAccount(GroupBase):
     
     @api.model
     def create(self, values):
+        if not "account_id" in values:
+            values["account_id"] = self._context.get("account_id")
         res = super().create(values)
-        
-        #=======================================================================
-        # print(res)
-        #=======================================================================
         
         none_item = self.env["analytic_accounts.group.item"].create({
             "sub_account_id": res.id,
@@ -680,4 +658,11 @@ class GroupSubAccount(GroupBase):
 class GroupItem(GroupBase):
     _name = "analytic_accounts.group.item"
 
-    sub_account_id = fields.Many2one("analytic_accounts.group.sub_account", ondelete="cascade")
+    sub_account_id = fields.Many2one("analytic_accounts.group.sub_account", ondelete="cascade") 
+    
+    @api.model
+    def create(self, values):
+        if not "sub_account_id" in values:
+            values["sub_account_id"] = self._context.get("sub_account_id")
+        res = super().create(values)
+        return res
