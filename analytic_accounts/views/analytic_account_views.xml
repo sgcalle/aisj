@@ -6,6 +6,7 @@
 		<field name="priority" eval="21" />
 		<field name="arch" type="xml">
 			<form>
+
 				<sheet string="Analytic Account">
 					<div class="oe_button_box" name="button_box">
 						<button class="oe_stat_button" type="action" name="108"
