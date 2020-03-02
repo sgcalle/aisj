@@ -211,8 +211,6 @@
 				<field name="group" />
 				<field name="account" />
 				<field name="sub_account" />
-
-
 			</search>
 		</field>
 	</record>
