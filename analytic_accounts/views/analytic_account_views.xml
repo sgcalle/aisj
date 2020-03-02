@@ -217,18 +217,18 @@
 		</field>
 	</record>
 
-	<record model="ir.ui.view"
-		id="view_analytic_account_report_form">
-		<field name="name">Analytic Account Report Form</field>
-		<field name="priority" eval="40" />
-		<field name="arch" type="xml">
-			<t t-foreach="[1, 2, 3]" t-as="i">
-				<p>
-					<t t-esc="i" />
-				</p>
-			</t>
-		</field>
-	</record>
+<!-- 	<record model="ir.ui.view" -->
+<!-- 		id="view_analytic_account_report_form"> -->
+<!-- 		<field name="name">Analytic Account Report Form</field> -->
+<!-- 		<field name="priority" eval="40" /> -->
+<!-- 		<field name="arch" type="xml"> -->
+<!-- 			<t t-foreach="[1, 2, 3]" t-as="i"> -->
+<!-- 				<p> -->
+<!-- 					<t t-esc="i" /> -->
+<!-- 				</p> -->
+<!-- 			</t> -->
+<!-- 		</field> -->
+<!-- 	</record> -->
 
 	<record id="view_company_form_with_code" model="ir.ui.view">
 		<field name="name">id.category.list2</field>
