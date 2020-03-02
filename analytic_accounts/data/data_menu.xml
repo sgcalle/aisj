@@ -17,13 +17,13 @@
     </record>
     
     <!-- Action for just see account -->
-    <record model="ir.actions.act_window" id="action_analytic_account_report_form">
-        <field name="name">Analytic account</field>
-        <field name="res_model">account.analytic.account</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_analytic_account_report_form"/>
-        <field name="target">inline</field>
-    </record>
+<!--     <record model="ir.actions.act_window" id="action_analytic_account_report_form"> -->
+<!--         <field name="name">Analytic account</field> -->
+<!--         <field name="res_model">account.analytic.account</field> -->
+<!--         <field name="view_mode">form</field> -->
+<!--         <field name="view_id" ref="view_analytic_account_report_form"/> -->
+<!--         <field name="target">inline</field> -->
+<!--     </record> -->
 
     <!-- Actions for department -->
     <record model="ir.actions.act_window" id="action_analytic_account_group_department">
