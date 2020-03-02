@@ -154,8 +154,8 @@
               action="action_analytic_account_group_item"
               name="Items"/>
                 
-    <menuitem id="menu_analytic_account_report_form"
-              parent="menu_analytic_account_parent"
-              action="action_analytic_account_report_form"
-              name="Analytic Reports"/>
+<!--     <menuitem id="menu_analytic_account_report_form" -->
+<!--               parent="menu_analytic_account_parent" -->
+<!--               action="action_analytic_account_report_form" -->
+<!--               name="Analytic Reports"/> -->
 </odoo>
